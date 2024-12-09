@@ -22,16 +22,16 @@ export default function FormPage() {
         body: JSON.stringify(formData),
       })
 
-      const result = await response.json()
       if (response.ok) {
         setMessage('Formular erfolgreich abgeschickt!')
         setFormData({ name: '', email: '', phone: '' }) // Formular leeren
       } else {
-        
+        setMessage('Serverfehlerr, bitte später erneut versuchen.')
       }
-    } catch (error) {
+    } catch {
       setMessage('Serverfehlerr, bitte später erneut versuchen.')
     }
+    
   }
 
   return (
