@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '../../../lib/supabaseClient'
+import { supabase } from '../../../../lib/supabaseClient'
 
 
 
@@ -8,6 +8,8 @@ type FormData = {
   email: string
   phone: string
 }
+
+
 
 // GET-Methode: Alle Einträge aus der Tabelle abrufen
 export async function GET() {
