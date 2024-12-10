@@ -1,12 +1,21 @@
 import { NextResponse } from 'next/server'
+import { supabase } from '../../../../../utils/supabaseClient'
 
-export async function GET(request: Request) {
-    // The `/auth/callback` route is required for the server-side auth flow implemented
-    // by the Auth Helpers package. It exchanges an auth code for the user's session.
-    // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
-    const requestUrl = new URL(request.url)
+
+
+  export async function GET() {
+    try {
+      const { data, error } = await supabase.from('contact-form').select('*')
+      console.log(data, error)
+      if (error) {
+        console.error('Fehler beim Abrufen:', error)
+        return NextResponse.json({ error: error.message }, { status: 500 })
+      }
   
-  
-    // URL to redirect to after sign in process completes
-    return NextResponse.redirect(requestUrl.origin)
+      return NextResponse.json({ data }, { status: 200 })
+    } catch (error) {
+      console.error('Serverfehler:', error)
+      return NextResponse.json({ error: 'Serverfehler' }, { status: 500 })
+      
+    }
   }
