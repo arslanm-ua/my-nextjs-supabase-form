@@ -9,7 +9,8 @@ type FormData = {
   phone: string
 }
 
-
+if (!supabase) throw new Error('supabaseUrl is required.')
+  if (!supabase) throw new Error('supabaseKey is required.')
 
 // GET-Methode: Alle Einträge aus der Tabelle abrufen
 export async function GET() {
